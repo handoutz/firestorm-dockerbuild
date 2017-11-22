@@ -33,8 +33,9 @@ Clone Firestorm repository
 ```
 hg clone http://hg.phoenixviewer.com/phoenix-firestorm-lgpl
 ```
-Configure Firestorm
+Change into Firestorm Directory and Configure Firestorm
 ```
+cd phoenix-firestorm-lgpl
 autobuild -m64 configure -c ReleaseFS_open -- --clean -DLL_TESTS:BOOL=FALSE
 ```
 Build firestorm
