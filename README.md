@@ -4,7 +4,7 @@ Docker image with build environment (Ubuntu 16.04, gcc-4.7) for Firestorm Deploy
 Firestorm is using a whole own set of its own shared libraries with outdated versions. It's just able to compile successfully on very specific versions of system libraries and just with gcc-4.7. And it needs many dependencies and custom builds that would trash up every rather new and up-to-date system.
 By using a docker container, you don't have to worry about system-updates breaking the build environment and you don't have to install shady packages.
 ## HowTo Install
-Install docker if not already installed
+Install docker if not already installed (use your package manager of choice, like apt-get on debian, instead of dnf)
 ```
 dnf install docker
 ```
@@ -23,7 +23,8 @@ Copy the autobuild script to PATH (/usr/local/bin is the best place, if you have
 cp ./autobuild /usr/bin/autobuild
 ```
 ## HowTo use it
-To compile Firestorm, you would have to:
+To compile Firestorm, you have to:
+
 Install mercurial
 ```
 dnf install mercurial
