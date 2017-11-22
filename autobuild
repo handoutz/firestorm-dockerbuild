@@ -1,0 +1,7 @@
+#!/bin/sh
+# this scripts runs the autobuild command in the docker image with the name firestorm-buildenv
+#
+# the current directory will be mounted as /opt/firestorm within the docker container and autobuild
+# will run inside that directory.
+
+docker run --rm -v "$(pwd)":/opt/firestorm firestorm-buildenv autobuild "$@"
