@@ -43,6 +43,17 @@ Build firestorm
 autobuild -m64 build -c ReleaseFS_open
 ```
 Done. The Firestorm Binaries are now located in build-linux-x86_64/newview/packaged or as archive in build-linux-x86_64/newview/Phoenix_FirestormOS-private-[version number].tar.xz
+
+###Compile with fmodex (needed for sound)
+To compile it with the third party library fmodex, run
+```
+autobuild fmodex
+```
+in the Firestorm source-directory, before compiling Firestorm with the additional --fmodex and --avx flags
+```
+autobuild -m64 build -c ReleaseFS_open --package --fmodex --avx
+```
+
 ## How it works
 The Docker image contains the Ubuntu System with the correct gcc version and build envrionment.
 When you run the autobuild script (the script from this repo here), it runs the image, mounts the current directory inside the image, and executes the LindenLab autobuild with the arguments you give it there.

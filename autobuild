@@ -3,5 +3,12 @@
 #
 # the current directory will be mounted as /opt/firestorm within the docker container and autobuild
 # will run inside that directory.
+DOCKERIMAGE="firestorm-buildenv"
 
-docker run --rm -v "$(pwd)":/opt/firestorm firestorm-buildenv autobuild "$@"
+# if first argument is "fmodex" configure fmodex instead
+if [ "$1" == "fmodex" ]; then 
+  docker run --rm -v "$(pwd)":/opt/firestorm $DOCKERIMAGE setup-fmodex.sh
+  exit
+fi
+
+docker run --rm -v "$(pwd)":/opt/firestorm $DOCKERIMAGE autobuild "$@"

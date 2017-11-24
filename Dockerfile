@@ -47,13 +47,26 @@ RUN update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-4.7 100 \
  && update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-4.7 100 \
  && update-alternatives --install /usr/bin/gcov gcov /usr/bin/gcov-4.7 100
 
-RUN hg clone https://bitbucket.org/NickyD/autobuild-1.0 /opt/autobuild; \
-    ln -s /opt/autobuild/bin/autobuild /usr/bin/autobuild
+RUN hg clone https://bitbucket.org/NickyD/autobuild-1.0 /opt/autobuild \
+ && ln -s /opt/autobuild/bin/autobuild /usr/bin/autobuild \
+ && hg clone https://bitbucket.org/NickyD/3p-fmodex /opt/fmodex
 
-# Add files.
-ADD default-build.sh /usr/bin
+# Add and compile fmodex
+COPY fmodapi44461linux.tar.gz /opt/fmodex
+RUN cd /opt/fmodex \
+ && sed -i 's#URL_BASE=.*#URL_BASE=file://./#' build-cmd.sh \
+ && autobuild build --all \
+ && autobuild package
 
-#Set Volumde for Firestorm Source
+# Add scripts
+COPY default-build.sh /usr/bin/
+COPY setup-fmodex.sh /usr/bin/
+
+RUN cd /opt/fmodex && sed -i 's/URL_BASE=.*/URL_BASE=\"file:\/\/.\/\"/' build-cmd.sh \
+ && autobuild build --all \
+ && autobuild package
+
+#Set Volume for Firestorm Source
 VOLUME ["/opt/firestorm"]
 
 # Set environment variables.
