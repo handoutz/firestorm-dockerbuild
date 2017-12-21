@@ -44,7 +44,7 @@ autobuild -m64 build -c ReleaseFS_open
 ```
 Done. The Firestorm Binaries are now located in build-linux-x86_64/newview/packaged or as archive in build-linux-x86_64/newview/Phoenix_FirestormOS-private-[version number].tar.xz
 
-###Compile with fmodex (needed for sound)
+### Compile with fmodex (needed for sound)
 To compile it with the third party library fmodex, run
 ```
 autobuild fmodex
